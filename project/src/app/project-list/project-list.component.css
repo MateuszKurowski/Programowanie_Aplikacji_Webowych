@@ -1,0 +1,17 @@
+.ml-5 {
+  margin-left: 5px;
+}
+
+.mt-5 {
+  margin-top: 5px;
+}
+
+.btn-icon-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bigger-name {
+  font-size: large;
+}

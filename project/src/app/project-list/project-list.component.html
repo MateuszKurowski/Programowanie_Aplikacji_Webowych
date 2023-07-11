@@ -1,0 +1,48 @@
+<h2>Project List</h2>
+
+<ng-container [ngSwitch]="showAddButton" *ngIf="!editMode">
+    <ng-container *ngSwitchCase="true">
+        <button class="btn-medium red lighten-2 btn-icon-text" (click)="addButtonClick(); form.onShowForm()">
+            <i class="material-icons">
+                add
+            </i>
+            <span>
+                Dodaj projekt
+            </span>
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="false">
+        <button class="btn-medium red lighten-2 btn-icon-text" (click)="undoAddButtonClick(); form.onShowForm()">
+            <i class="material-icons">
+                undo
+            </i>
+            <span>
+                Cofnij
+            </span>
+        </button>
+    </ng-container>
+</ng-container>
+
+<app-add-project-form [editMode]="editMode" [project]='projectToEdit' #form (newProject)="addProject($event)"
+    (saveProject)="editProject()"></app-add-project-form>
+
+<br />
+
+<ul class="collection">
+    <li class="collection-item row" *ngFor="let project of projects">
+        <span class="col s10 mt-5" (click)="selectProject(project)">
+            <span class="bigger-name">
+                <b>Nazwa:</b> {{ project.Name }}
+            </span> <br />
+            <b>Data utworzenia:</b> {{ project.AddDate | date: 'dd/MM/yyyy HH:mm'}} <br />
+            <b>Opis:</b> {{ project.Description}}
+        </span>
+        <div class="col s2 right-align">
+            <ng-container *ngIf="showButtons()">
+                <app-button Color="orange" Text="edit"
+                    (click)="editButtonClick(project); form.onShowForm();"></app-button>
+                <app-button Color="red" Text="remove" (click)="deleteProject(project)"></app-button>
+            </ng-container>
+        </div>
+    </li>
+</ul>

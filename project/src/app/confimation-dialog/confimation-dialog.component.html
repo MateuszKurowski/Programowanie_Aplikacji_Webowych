@@ -1,0 +1,21 @@
+<ng-container *ngIf="data.listName === 'funkcja'; then function ; else project"></ng-container>
+<ng-template #function>
+    <h1 mat-dialog-title>Czy na pewno chcesz tą funkcję? Nie wszystkie zadania zostały ukończone.</h1>
+</ng-template>
+<ng-template #project>
+    <h1 mat-dialog-title>Czy na pewno chcesz ten projekt? Nie wszystkie funkcjonalnoś<cite></cite> zostały ukończone.
+    </h1>
+</ng-template>
+
+<div mat-dialog-actions class="dialog-buttons">
+    <button class="btn-medium red lighten-2 btn-icon-text .ml-5" mat-button cdkFocusInitial (click)="onYesClick()">
+        <span>
+            Tak
+        </span>
+    </button>
+    <button class="btn-medium green lighten-2 btn-icon-text .ml-5" mat-button (click)="onNoClick()">
+        <span>
+            Nie
+        </span>
+    </button>
+</div>

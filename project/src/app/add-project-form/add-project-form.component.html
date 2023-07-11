@@ -1,0 +1,29 @@
+<div class="row edit-row" *ngIf="showForm" [class.drawer]="showForm">
+    <div class="input-field col s4">
+        <i class="material-icons prefix">badge</i>
+        <input type="text" ngModel required placeholder="Nazwa" [(ngModel)]="project.Name" />
+    </div>
+    <div class="input-field col s8">
+        <i class="material-icons prefix">description</i>
+        <input type="text" placeholder="Opis" [(ngModel)]="project.Description" />
+    </div>
+    <ng-container [ngSwitch]="editMode">
+        <div *ngSwitchCase="false" class="input-field col s2" (click)="addProject()">
+            <button class="btn red lighten-2 btn-icon-text" [disabled]="project.Name === ''">
+                <i class="material-icons">
+                    add
+                </i>
+                <span>&nbsp;Dodaj</span>
+            </button>
+        </div>
+        <div *ngSwitchCase="true" class="input-field col s2" (click)="onSaveProject()">
+            <button class="btn red lighten-2 btn-icon-text" [disabled]="project.Name === ''">
+                <i class="material-icons">
+                    edit
+                </i>
+                <span>&nbsp;Zapisz</span>
+            </button>
+        </div>
+    </ng-container>
+
+</div>

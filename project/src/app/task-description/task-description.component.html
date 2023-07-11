@@ -1,0 +1,59 @@
+<div [ngClass]="{'done': isDone()}">
+    <span class="bigger-name">
+        <b>Nazwa: </b>{{ task.Name }}
+    </span> <br />
+    <b>Data dodania: </b>{{ task.AddDate | date: 'dd/MM/yyyy HH:mm'}} <br />
+    <b>Priorytet: </b>{{ task.Priority }} <br />
+    <ng-container [ngSwitch]=task.Status>
+        <span class="btn-icon-text" *ngSwitchCase="taskStatus.ToDo">
+            <b>Status: </b>Do zrobienia
+            <i class="material-icons">
+                battery_0_bar
+            </i>
+            <br />
+        </span>
+        <span class="btn-icon-text" *ngSwitchCase="taskStatus.Doing">
+            <b>Status: </b>W trakcie
+            <i class="material-icons">
+                battery_4_bar
+            </i>
+            <br />
+        </span>
+        <span class="btn-icon-text" *ngSwitchCase="taskStatus.Done">
+            <b>Status: </b>Zrobione
+            <i class="material-icons" style="text-decoration:none">
+                battery_full
+            </i>
+            <br />
+        </span>
+    </ng-container>
+    <b>Opis: </b>{{ task.Description }} <br />
+    <br />
+    <ng-container [ngSwitch]=task.Status>
+        <span *ngSwitchCase="taskStatus.Done">
+            <b>Oczekiwana data: </b><u>{{ task.ExpectedDate | date: 'dd/MM/yyyy HH:mm'}}</u> <br />
+        </span>
+        <ng-container *ngSwitchDefault>
+            <span *ngIf="task.DaysLeft > 7">
+                <b>Oczekiwana data: </b><u>{{ task.ExpectedDate | date: 'dd/MM/yyyy HH:mm'}}</u> <br />
+            </span>
+            <span *ngIf="task.DaysLeft <= 7 && task.DaysLeft > 3" class="seven-days-left">
+                <b>Oczekiwana data: </b><u>{{ task.ExpectedDate | date: 'dd/MM/yyyy HH:mm'}}</u> <br />
+            </span>
+            <span *ngIf="task.DaysLeft <= 3 && task.DaysLeft > 0" class="three-days-left">
+                <b>Oczekiwana data: </b><u>{{ task.ExpectedDate | date: 'dd/MM/yyyy HH:mm'}}</u> <br />
+            </span>
+            <span *ngIf="task.DaysLeft <= 0" class="end-of-time">
+                <b>Oczekiwana data: </b><u>{{ task.ExpectedDate | date: 'dd/MM/yyyy HH:mm'}}</u> <br />
+            </span>
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="isDoing()">
+        <b>Data rozpoczęcia: </b>{{ task.StartDate | date: 'dd/MM/yyyy HH:mm'}} <br />
+    </ng-container>
+
+    <ng-container *ngIf="isDone()">
+        <b>Data zakończenia: </b>{{ task.EndDate | date: 'dd/MM/yyyy HH:mm'}} <br />
+    </ng-container>
+</div>

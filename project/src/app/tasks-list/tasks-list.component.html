@@ -1,0 +1,100 @@
+<button class=" btn-medium red lighten-2 btn-icon-text" (click)="backToFunctionality()">
+    <i class="material-icons">
+        keyboard_backspace
+    </i>
+    <span>
+        Powrót
+    </span>
+</button>
+
+<h2>{{ functionality.Name }}</h2>
+
+<ng-container [ngSwitch]="showAddButton" *ngIf="!editMode">
+    <ng-container *ngSwitchCase="true">
+        <button class="btn-medium red lighten-2 btn-icon-text" (click)="addButtonClick(); form.onShowForm()">
+            <i class="material-icons">
+                add
+            </i>
+            <span>
+                Dodaj zadanie
+            </span>
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="false">
+        <button class="btn-medium red lighten-2 btn-icon-text" (click)="undoAddButtonClick(); form.onShowForm()">
+            <i class="material-icons">
+                undo
+            </i>
+            <span>
+                Cofnij
+            </span>
+        </button>
+    </ng-container>
+</ng-container>
+
+<app-add-task-form [editMode]="editMode" [task]='taskToEdit' #form (newTask)="addTask($event)"
+    (saveTask)="editTask()"></app-add-task-form>
+
+<br />
+
+<div class="kanban">
+    <div class="kanban-column">
+        <h3>Todo</h3>
+        <ul class="collection">
+            <ng-container *ngFor="let task of functionality.Tasks">
+                <li class="collection-item row" *ngIf="isToDo(task)">
+                    <app-task-description class="col s10" [task]="task"></app-task-description>
+                    <div class="col s2 right-align">
+                        <ng-container *ngIf="showButtons()">
+                            <app-button Color="green" Text="done"
+                                (click)="moveTask(task, taskStatus.Doing)"></app-button>
+                            <app-button Color="orange" Text="edit"
+                                (click)="editButtonClick(task); form.onShowForm();"></app-button>
+                            <app-button Color="red" Text="remove" (click)="deleteTask(task)"></app-button>
+                        </ng-container>
+                    </div>
+
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+    <div class="kanban-column">
+        <h3>Doing</h3>
+        <ul class="collection">
+            <ng-container *ngFor="let task of functionality.Tasks">
+                <li class="collection-item row" *ngIf="isDoing(task)">
+                    <app-task-description class="col s10" [task]="task"></app-task-description>
+                    <div class="col s2 right-align">
+                        <ng-container *ngIf="showButtons()">
+                            <app-button Color="green" Text="done"
+                                (click)="moveTask(task, taskStatus.Done)"></app-button>
+                            <app-button Color="gray" Text="undo" (click)="moveTask(task, taskStatus.ToDo)"></app-button>
+                            <app-button Color="orange" Text="edit"
+                                (click)="editButtonClick(task); form.onShowForm();"></app-button>
+                            <app-button Color="red" Text="remove" (click)="deleteTask(task)"></app-button>
+                        </ng-container>
+                    </div>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+    <div class="kanban-column">
+        <h3>Done</h3>
+        <ul class="collection">
+            <ng-container *ngFor="let task of functionality.Tasks">
+                <li class="collection-item row" *ngIf="isDone(task)">
+                    <app-task-description class="col s10" [task]="task"></app-task-description>
+                    <div class="col s2 right-align">
+                        <ng-container *ngIf="showButtons()">
+                            <app-button Color="gray" Text="undo"
+                                (click)="moveTask(task, taskStatus.Doing)"></app-button>
+                            <!-- <app-button Color="orange" Text="edit"
+                                (click)="editButtonClick(task); form.onShowForm();"></app-button> -->
+                            <app-button Color="red" Text="remove" (click)="deleteTask(task)"></app-button>
+                        </ng-container>
+                    </div>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</div>

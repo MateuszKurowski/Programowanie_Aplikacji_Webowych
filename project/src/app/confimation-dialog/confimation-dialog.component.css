@@ -1,0 +1,21 @@
+.ml-5 {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+.btn-icon-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .dialog-buttons button {
+    padding: 15px 30px;
+    font-size: 18px;
+  }

@@ -1,0 +1,38 @@
+.done {
+  color: silver;
+  text-decoration: line-through;
+}
+
+.dontDone {
+  text-decoration: none;
+}
+
+.ml-5 {
+  margin-left: 5px;
+}
+
+.btn-icon-text {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.mt-5 {
+  margin-top: 5px;
+}
+
+.bigger-name {
+  font-size: large;
+}
+
+.seven-days-left {
+  color: #ffcdd2;
+}
+
+.three-days-left {
+  color: #e57373;
+}
+
+.end-of-time {
+  color: red;
+}

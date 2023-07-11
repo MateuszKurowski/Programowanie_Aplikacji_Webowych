@@ -1,0 +1,45 @@
+<ng-container *ngIf="showForm" [class.drawer]="showForm">
+    <div class="row edit-row">
+        <div class="input-field col s3">
+            <i class="material-icons prefix">badge</i>
+            <input type="text" ngModel required placeholder="Nazwa" [(ngModel)]="task.Name" />
+        </div>
+        <div class="input-field col s8">
+            <i class="material-icons prefix">description</i>
+            <input type="text" placeholder="Opis" [(ngModel)]="task.Description" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s2">
+            <i class="material-icons prefix">priority_high</i>
+            <input type="number" min="1" max="10" [(ngModel)]="task.Priority" />
+        </div>
+
+        <div class="input-field col s4">
+            <i class="material-icons prefix">calendar_month</i>
+            <input type="datetime-local" [(ngModel)]="task.ExpectedDate" />
+        </div>
+    </div>
+
+
+    <ng-container [ngSwitch]="editMode">
+        <div *ngSwitchCase="false" class="input-field col s2" (click)="addTask()">
+            <button class="btn red lighten-2 btn-icon-text" [disabled]="task.Name === '' || task.ExpectedDate === null">
+                <i class="material-icons">
+                    add
+                </i>
+                <span>&nbsp;Dodaj</span>
+            </button>
+        </div>
+        <div *ngSwitchCase="true" class="input-field col s2" (click)="onSaveTask()">
+            <button class="btn red lighten-2 btn-icon-text" [disabled]="task.Name === '' || task.ExpectedDate === null">
+                <i class="material-icons">
+                    edit
+                </i>
+                <span>&nbsp;Zapisz</span>
+            </button>
+        </div>
+    </ng-container>
+
+</ng-container>

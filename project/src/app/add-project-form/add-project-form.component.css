@@ -1,0 +1,33 @@
+.btn-icon-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* label color */
+.input-field label {
+  color: #e57373;
+}
+/* label focus color */
+.input-field input:focus + label {
+  color: #e57373;
+}
+/* label underline focus color */
+.input-field input:focus {
+  border-bottom: 1px solid #e57373;
+  box-shadow: 0 1px 0 0 #e57373;
+}
+/* valid color */
+.input-field input.valid {
+  border-bottom: 1px solid #e57373;
+  box-shadow: 0 1px 0 0 #e57373;
+}
+/* invalid color */
+.input-field input.invalid {
+  border-bottom: 1px solid #ff0000;
+  box-shadow: 0 1px 0 0 #ff0000;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: #e57373;
+}

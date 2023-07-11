@@ -1,0 +1,16 @@
+<body class="container">
+
+  <app-nav-bar title="Projekt zaliczeniowy" [userName]="user.FirstName"></app-nav-bar>
+
+  <app-project-list [projects]="projects" *ngIf="!selectedProject"
+    (projectsChangeEmitter)="onProjectsChangeSave($event)"
+    (selectedProjectEvent)="onSelectProject($event)"></app-project-list>
+  <app-function-list *ngIf="selectedProject && !selectedFunctionality" [project]="selectedProject"
+    (changeEmitter)="onChangeSave()" (selectedFunctionalityEvent)="onSelectFunctionality($event)"
+    (backToProjectEvent)="backtoProjectsList()"></app-function-list>
+  <app-tasks-list *ngIf="selectedFunctionality" [functionality]="selectedFunctionality" (changeEmitter)="onChangeSave()"
+    (backToFunctionalityEvent)="backToProject()"></app-tasks-list>
+  <br />
+
+  <app-footer [date]="date"></app-footer>
+</body>

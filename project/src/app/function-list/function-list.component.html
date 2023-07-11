@@ -1,0 +1,83 @@
+<button class="btn-medium red lighten-2 btn-icon-text" (click)="backToProject()">
+    <i class="material-icons">
+        keyboard_backspace
+    </i>
+    <span>
+        Powrót
+    </span>
+</button>
+
+<h2>{{ project.Name }}</h2>
+
+<ng-container [ngSwitch]="showAddButton" *ngIf="!editMode">
+    <ng-container *ngSwitchCase="true">
+        <button class="btn-medium red lighten-2 btn-icon-text" (click)="addButtonClick(); form.onShowForm()">
+            <i class="material-icons">
+                add
+            </i>
+            <span>
+                Dodaj funkcjonalność
+            </span>
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="false">
+        <button class="btn-medium red lighten-2 btn-icon-text" (click)="undoAddButtonClick(); form.onShowForm()">
+            <i class="material-icons">
+                undo
+            </i>
+            <span>
+                Cofnij
+            </span>
+        </button>
+    </ng-container>
+</ng-container>
+
+<app-add-functionality-form [editMode]="editMode" [functionality]='functionalityToEdit' #form
+    (newFunctionality)="addFunctionality($event)"
+    (saveFunctionality)="editFunctionality()"></app-add-functionality-form>
+
+<br />
+
+<ul class="collection">
+    <li class="collection-item row" *ngFor="let functionality of project.Functionalities">
+        <span [ngClass]="{'done': isDone(functionality)}" class="col s10 mt-5"
+            (click)="selectFunctionality(functionality)">
+            <span class="bigger-name">
+                <b>Nazwa: </b>{{ functionality.Name }}
+            </span> <br />
+            <b>Priorytet: </b>{{ functionality.Priority }} <br />
+            <ng-container [ngSwitch]=functionality.Status>
+                <span class="btn-icon-text" *ngSwitchCase="functionalityStatus.ToDo">
+                    <b>Status: </b>Do zrobienia
+                    <i class="material-icons">
+                        battery_0_bar
+                    </i>
+                    <br />
+                </span>
+                <span class="btn-icon-text" *ngSwitchCase="functionalityStatus.Doing">
+                    <b>Status: </b>W trakcie
+                    <i class="material-icons">
+                        battery_4_bar
+                    </i>
+                    <br />
+                </span>
+                <span class="btn-icon-text" *ngSwitchCase="functionalityStatus.Done">
+                    <b>Status: </b>Zrobione
+                    <i class="material-icons" style="text-decoration:none">
+                        battery_full
+                    </i>
+                    <br />
+                </span>
+            </ng-container>
+            <b>Data utowrzenia: </b>{{ functionality.AddDate | date: 'dd-MM-yyyy HH:mm'}} <br />
+            <b>Opis: </b>{{ functionality.Description }} <br />
+        </span>
+        <div class="col s2 right-align">
+            <ng-container *ngIf="showButtons()">
+                <app-button *ngIf="functionality.Status !== functionalityStatus.Done" Color="orange" Text="edit"
+                    (click)="editButtonClick(functionality); form.onShowForm();"></app-button>
+                <app-button Color="red" Text="remove" (click)="deleteFunctionality(functionality)"></app-button>
+            </ng-container>
+        </div>
+    </li>
+</ul>

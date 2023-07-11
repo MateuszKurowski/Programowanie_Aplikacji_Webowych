@@ -1,0 +1,22 @@
+.done {
+  color: silver;
+  text-decoration: line-through;
+}
+
+.ml-5 {
+  margin-left: 5px;
+}
+
+.btn-icon-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mt-5 {
+  margin-top: 5px;
+}
+
+.bigger-name {
+  font-size: large;
+}
