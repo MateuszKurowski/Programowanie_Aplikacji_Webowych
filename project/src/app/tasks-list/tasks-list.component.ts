@@ -16,6 +16,7 @@ export class TasksListComponent implements OnInit {
   taskDayLeft: number = 0;
 
   ngOnInit(): void {
+    this.countLeftTime();
     this.sortTasks();
   }
 
@@ -119,6 +120,18 @@ export class TasksListComponent implements OnInit {
       Status: Status.ToDo,
       DaysLeft: 0,
     };
+  }
+
+  private countLeftTime() {
+    this.functionality.Tasks.forEach((task) => {
+      if (!task || !task.ExpectedDate) {
+        return;
+      }
+      const today = new Date();
+      const taskExpectedDay = new Date(task.ExpectedDate);
+      let differenceInTime = taskExpectedDay.getTime() - today.getTime();
+      task.DaysLeft = differenceInTime / (1000 * 3600 * 24);
+    });
   }
 
   private sortTasks(): void {
