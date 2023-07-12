@@ -17,6 +17,11 @@
   justify-content: left;
 }
 
+.btn-icon-text2 {
+  align-items: center;
+  justify-content: left;
+}
+
 .mt-5 {
   margin-top: 5px;
 }

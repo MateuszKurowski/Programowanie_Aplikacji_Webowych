@@ -5,29 +5,44 @@
     <b>Data dodania: </b>{{ task.AddDate | date: 'dd/MM/yyyy HH:mm'}} <br />
     <b>Priorytet: </b>{{ task.Priority }} <br />
     <ng-container [ngSwitch]=task.Status>
-        <span class="btn-icon-text" *ngSwitchCase="taskStatus.ToDo">
-            <b>Status: </b>Do zrobienia
-            <i class="material-icons">
-                battery_0_bar
-            </i>
-            <br />
-        </span>
-        <span class="btn-icon-text" *ngSwitchCase="taskStatus.Doing">
-            <b>Status: </b>W trakcie
-            <i class="material-icons">
-                battery_4_bar
-            </i>
-            <br />
-        </span>
-        <span class="btn-icon-text" *ngSwitchCase="taskStatus.Done">
-            <b>Status: </b>Zrobione
-            <i class="material-icons" style="text-decoration:none">
-                battery_full
-            </i>
-            <br />
-        </span>
+        <ng-container *ngSwitchCase="taskStatus.ToDo">
+            <span class="btn-icon-text">
+                <b>Status: </b>Do zrobienia
+                <i class="material-icons">
+                    battery_0_bar
+                </i>
+                <br />
+            </span>
+            <b>Opis: </b>{{ task.Description }} <br />
+        </ng-container>
+        <ng-container *ngSwitchCase="taskStatus.Doing">
+            <span class="btn-icon-text">
+                <b>Status: </b>W trakcie
+                <i class="material-icons">
+                    battery_4_bar
+                </i>
+                <br />
+            </span>
+            <b>Opis: </b>{{ task.Description }} <br />
+        </ng-container>
+
+        <ng-container *ngSwitchCase="taskStatus.Done">
+            <span class="btn-icon-text2" style="text-decoration:none;position: relative;top: -9px;">
+                <div style="margin: 0;width: fit-content;display: inline-block;text-decoration: line-through;">
+                    <b>Status:
+                    </b>Zrobione
+                </div>
+                <i class="material-icons dontDone"
+                    style="display:inline-block;margin: 0;width: fit-content;position: relative;top:6px">
+                    battery_full
+                </i>
+                <br />
+            </span>
+            <div style="position: relative;top: -9px;">
+                <b>Opis: </b>{{ task.Description }} <br />
+            </div>
+        </ng-container>
     </ng-container>
-    <b>Opis: </b>{{ task.Description }} <br />
     <br />
     <ng-container [ngSwitch]=task.Status>
         <span *ngSwitchCase="taskStatus.Done">

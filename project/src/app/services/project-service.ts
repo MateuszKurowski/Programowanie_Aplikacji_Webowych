@@ -10,7 +10,7 @@ export class ProjectService {
 
   constructor() {
     this.loadFromLocalStorage();
-    // this.loadFromDummy();
+    this.loadFromDummy();
     console.log(this.projects);
   }
 

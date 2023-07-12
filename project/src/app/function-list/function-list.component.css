@@ -16,3 +16,8 @@
   color: silver;
   text-decoration: line-through;
 }
+
+.btn-icon-text2 {
+  align-items: center;
+  justify-content: left;
+}
